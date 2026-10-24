@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: incident-agent-v2
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://aipipe.org/openai/v1
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+      - key: LLM_LAST_MODELS
+        value: gpt-4.1-mini
+      - key: LLM_CALL_TIMEOUT_S
+        value: "9"
+      - key: PLAN_BUDGET_S
+        value: "13"
+      - key: PYTHON_VERSION
+        value: "3.12.7"
